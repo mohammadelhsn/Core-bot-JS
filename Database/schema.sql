@@ -1,0 +1,214 @@
+CREATE DATABASE DiscordDb;
+
+CREATE TABLE Guilds
+(
+  guildId VARCHAR(100) NOT NULL PRIMARY KEY,
+  guildOwnerId VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE GuildConfigurable
+(
+  guildId VARCHAR(100) NOT NULL PRIMARY KEY,
+  cmdPrefix VARCHAR(10) DEFAULT '!'
+);
+
+CREATE TABLE GuildLogging
+(
+  guildId VARCHAR(100) NOT NULL PRIMARY KEY,
+  modLogId VARCHAR(100) DEFAULT NULL,
+  memberLogId VARCHAR(100) DEFAULT NULL,
+  publicModLogId VARCHAR(100) DEFAULT NULL,
+  roleLogId VARCHAR(100) DEFAULT NULL,
+  appealsId VARCHAR(100) DEFAULT NULL,
+  reportsId VARCHAR(100) DEFAULT NULL,
+  actionLogId VARCHAR(100) DEFAULT NULL,
+  suggestionsId VARCHAR(100) DEFAULT NULL
+);
+
+CREATE TABLE GuildSettings
+(
+  guildId VARCHAR(100) NOT NULL PRIMARY KEY,
+  command VARCHAR(100) DEFAULT NULL
+)
+
+CREATE TABLE GuildDisabled
+(
+  guildId VARCHAR(100) NOT NULL,
+  disabledCommands VARCHAR(100)
+)
+
+CREATE TABLE GuildModerations
+(
+  guildId VARCHAR(100) NOT NULL,
+  moderation VARCHAR(100) NOT NULL,
+  reason VARCHAR(100) DEFAULT NULL,
+  caseNumber VARCHAR(100) NOT NULL,
+  moderatorId VARCHAR(100) NOT NULL,
+  userId VARCHAR(100) DEFAULT NULL,
+  messageId VARCHAR(100) DEFAULT NULL,
+  publicMessageId VARCHAR(100) DEFAULT NULL
+);
+
+CREATE TABLE BlacklistedUsers
+(
+  userId VARCHAR(100) NOT NULL PRIMARY KEY,
+  blackisted VARCHAR(100) NOT NULL,
+  reason VARCHAR(100) NOT NULL
+);
+
+
+CREATE TABLE ServerRoles
+(
+  guildId VARCHAR(100) NOT NULL PRIMARY KEY,
+  muteRoleId VARCHAR(100) DEFAULT NULL,
+  warn1RoleId VARCHAR(100) DEFAULT NULL,
+  warn2RoleId VARCHAR(100) DEFAULT NULL,
+  warn3RoleId VARCHAR(100) DEFAULT NULL,
+  adminRoleId VARCHAR(100) DEFAULT NULL,
+  modRoleId VARCHAR(100) DEFAULT NULL
+);
+
+CREATE TABLE RolePersist
+(
+  guildId VARCHAR(100) NOT NULL,
+  roleId VARCHAR(100) NOT NULL,
+  reason VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE ModNotes
+(
+  guildId VARCHAR(100) NOT NULL,
+  userId VARCHAR(100) NOT NULL,
+  userNote TEXT(500) NOT NULL
+);
+
+CREATE TABLE guildAFK
+(
+  guildId VARCHAR(100) NOT NULL,
+  userId VARCHAR(100) NOT NULL,
+  isAfk BOOLEAN NOT NULL,
+  afkStatus TEXT(500) NOT NULL
+);
+
+CREATE TABLE words
+(
+  guildId VARCHAR(100) NOT NULL,
+  isEnabled BOOLEAN NOT NULL DEFAULT FALSE,
+  disabledWords VARCHAR(100) NOT NULL PRIMARY KEY
+);
+
+CREATE TABLE welcomeSystem
+(
+  guildId VARCHAR(100) NOT NULL PRIMARY KEY,
+  isEnabled BOOLEAN NOT NULL DEFAULT FALSE,
+  media VARCHAR(100) DEFAULT NULL,
+  welcomeMessage TEXT(500) DEFAULT NULL,
+  welcomeChannelId VARCHAR(100) DEFAULT NULL
+);
+
+CREATE TABLE leaveSystem
+(
+  guildId VARCHAR(100) NOT NULL PRIMARY KEY,
+  isEnabled BOOLEAN NOT NULL DEFAULT FALSE,
+  media VARCHAR(100) DEFAULT NULL,
+  leaveMessage TEXT(500) DEFAULT NULL,
+  leaveChannelId VARCHAR(100) DEFAULT NULL
+);
+
+CREATE TABLE tags
+(
+  guildId VARCHAR(100) NOT NULL,
+  tagName VARCHAR(100) NOT NULL PRIMARY KEY,
+  tagContent TEXT(500) NOT NULL
+);
+
+CREATE TABLE ranks
+(
+  guildId VARCHAR(100) NOT NULL,
+  rankName VARCHAR(100) NOT NULL,
+  rankRoleId VARCHAR(100) NOT NULL,
+  PRIMARY KEY (rankName, rankRoleId)
+);
+
+CREATE TABLE protectedUsers
+(
+  guildId VARCHAR(100) NOT NULL,
+  userId VARCHAR(100) NOT NULL PRIMARY KEY
+)
+
+CREATE TABLE protectedRole
+(
+  guildId VARCHAR(100) NOT NULL,
+  roleId VARCHAR(100) NOT NULL PRIMARY KEY
+)
+
+
+CREATE TABLE reminders
+(
+  userId VARCHAR(100) NOT NULL,
+  reminderTime VARCHAR(100) NOT NULL,
+  reminder TEXT(500) NOT NULL
+);
+
+CREATE TABLE botBlacklist
+(
+  userId VARCHAR(100) NOT NULL PRIMARY KEY,
+  reason VARCHAR(100) NOT NULL
+)
+
+CREATE TABLE economy
+(
+  guildId VARCHAR(100) NOT NULL PRIMARY KEY,
+  isEnabled BOOLEAN NOT NULL DEFAULT FALSE,
+  currency VARCHAR(100) DEFAULT '💵',
+  startBalance VARCHAR(100) DEFAULT 0,
+  auditLog VARCHAR(100) DEFAULT NULL,
+  maxBalance VARCHAR(100) DEFAULT NULL,
+  totalBank VARCHAR(100) DEFAULT 0,
+  totalCash VARCHAR(100) DEFAULT 0,
+  totalNetWorth VARCHAR(100) DEFAULT 0
+);
+
+CREATE TABLE chatMoney
+(
+  guildId VARCHAR(100) NOT NULL PRIMARY KEY,
+  isEnabled BOOLEAN NOT NULL DEFAULT FALSE,
+  minAmount VARCHAR(100) DEFAULT 1,
+  maxAmount VARCHAR(100) DEFAULT 9
+);
+
+CREATE TABLE GuildMemberEconomy
+(
+  guildId VARCHAR(100) NOT NULL,
+  userId VARCHAR(100) NOT NULL,
+  claimedDaily BOOLEAN NOT NULL DEFAULT FALSE,
+  claimedWeekly BOOLEAN NOT NULL DEFAULT FALSE,
+  claimedYearly BOOLEAN NOT NULL DEFAULT FALSE,
+  balance VARCHAR(100) NOT NULL DEFAULT 0,
+  PRIMARY KEY(guildId, userId)
+);
+
+CREATE TABLE xpSystem
+(
+  guildId VARCHAR(100) NOT NULL,
+  isEnabled BOOLEAN NOT NULL DEFAULT FALSE,
+  maxAmount VARCHAR(100) NOT NULL DEFAULT 5,
+  minAmount VARCHAR(100) NOT NULL DEFAULT 1
+);
+
+CREATE TABLE GuildMemberExperience
+(
+  guildId VARCHAR(100) NOT NULL,
+  userId VARCHAR(100) NOT NULL,
+  currentLevel VARCHAR(100) DEFAULT 1,
+  experiencePoints VARCHAR(100) DEFAULT 1,
+  PRIMARY KEY(guildId, userId)
+);
+
+INSERT INTO economy
+  (guildId, isEnabled)
+VALUES('690975783363280918', true)
+
+INSERT INTO GuildModerations
+  (guildId, moderation, reason, caseNumber, moderatorId, userId, messageId, publicMessageId)
+VALUES('${obj.guildId}', '${obj.moderation}', '${obj.reason}')

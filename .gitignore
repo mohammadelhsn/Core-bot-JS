@@ -1,0 +1,17 @@
+.env
+.yml
+.ini
+.log
+.vscode
+.vscode/
+.txt
+.jar
+.dockerfile
+.dockerignore
+node_modules
+src/logs
+*.log
+*spring.log.
+ecosystem.config.js
+command.code-snippets
+application.yml

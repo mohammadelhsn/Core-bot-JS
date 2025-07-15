@@ -1,0 +1,19 @@
+{
+	"red_dark": "#8e2430",
+	"red": "#FF001D",
+	"red_light": "#f94343",
+	"orange": "#FF8C00",
+	"gold": "#daa520",
+	"green_light": "#97FF00",
+	"green": "#1BFF00",
+	"green_dark": "#2ac075",
+	"blue_dark": "#00008B",
+	"cyan": "#00E4FF",
+	"aqua": "#33a1ee",
+	"purple_dark": "#6a006a",
+	"purple_medium": "#9b59b6",
+	"purple_light": "#c481fb",
+	"pink": "#FF1493",
+	"cream": "#ffdab9",
+	"white": "#f9f9f6"
+}
