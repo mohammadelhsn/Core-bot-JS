@@ -8,6 +8,7 @@ A [Discord](https://discord.com) bot using [Discord.js](https://discord.js.org/#
 ![JavaScript](https://go-skill-icons.vercel.app/api/icons?i=js)
 ![Axios](https://go-skill-icons.vercel.app/api/icons?i=axios)
 ![Discord.js](https://go-skill-icons.vercel.app/api/icons?i=djs)
+![MySQL](https://go-skill-icons.vercel.app/api/icons?i=mysql)
 
 ## Invite Core
 
